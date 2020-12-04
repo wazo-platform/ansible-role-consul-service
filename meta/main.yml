@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: "Wazo Developers"
+  description: "Ansible role defining a Consul service"
+  company: "Wazo https://wazo.io"
+  license: "MIT"
+  min_ansible_version: 1.8
+  platforms:
+    - name: Debian
+      versions:
+        - buster
+    - name: Ubuntu
+      versions:
+        - bionic
+  galaxy_tags:
+    - system
+dependencies:
+  - brianshumate.consul
+  - wazo.metadata

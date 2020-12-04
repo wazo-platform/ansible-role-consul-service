@@ -1,0 +1,5 @@
+---
+# This is an example, you can get rid of it
+- src: git@github.com:TinxHQ/ansible-role-base.git
+  scm: git
+  name: wazo.base

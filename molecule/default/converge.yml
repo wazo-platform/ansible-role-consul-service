@@ -1,0 +1,31 @@
+---
+- name: Converge
+  hosts: molecule_consul_service
+  become: yes
+
+  vars:
+    consul_node_role: bootstrap
+    consul_group_name: molecule_consul_service
+    consul_service_url4: test.local
+    consul_service_tags:
+      - testtag
+      - published
+
+  pre_tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Check Nginx configuration directory
+      stat:
+        path: /etc/nginx
+      register: consul_service_nginx_configuration_directory
+      changed_when: False
+
+    - name: Install nginx so default consul service health check is fine
+      include_role:
+        name: nginxinc.nginx
+      when: not consul_service_nginx_configuration_directory.stat.exists
+
+  roles:
+    - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"

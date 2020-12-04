@@ -1,0 +1,41 @@
+---
+# tasks file for ansible-role-consul-service
+
+# consul reload seems to be missing /bin/kill when running molecule test
+- name: Consul requirements
+  package:
+    name: procps
+
+- name: Ensure Consul config directory exists
+  file:
+    state: directory
+    path: "{{ consul_config_dir }}"
+    owner: consul
+    group: bin
+    mode: "0700"
+
+- name: Check Consul bootstrapped file
+  stat:
+    path: /etc/consul/.consul_bootstrapped
+  register: consul_service_bootstrapped_file
+  changed_when: False
+
+- name: Setup Consul agent
+  include_role:
+    name: brianshumate.consul
+  when: not consul_service_bootstrapped_file.stat.exists
+
+- name: Define Consul service
+  template:
+    src: consul_service.json.j2
+    dest: "{{ consul_config_dir }}/{{ consul_service_name }}.service.json"
+    owner: consul
+    group: bin
+    mode: "0400"
+  register: consul_service_definition
+
+- name: Reload Consul # noqa 503
+  service:
+    name: consul
+    state: reloaded
+  when: consul_service_definition.changed

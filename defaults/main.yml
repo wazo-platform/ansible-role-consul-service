@@ -1,0 +1,38 @@
+---
+# defaults file for ansible-role-consul-service
+
+consul_service_name: "{{ metadata_service }}"
+consul_service_tags: []
+#  - published
+#  - basic_auth_enabled
+#  - prometheus
+consul_service_url: "{{ metadata_url }}"
+consul_service_url2: null
+consul_service_url3: null
+consul_service_url4: null
+consul_service_url5: null
+consul_service_port: 80
+consul_service_check_enabled: yes
+consul_service_check_port: "{{ consul_service_port }}"
+consul_service_check_protocol: http
+consul_service_check_method: HEAD
+consul_service_check_target: http://localhost:{{ consul_service_check_port }}/
+
+# brianshumate.consul settings
+consul_group_name: all
+consul_disable_update_check: true
+consul_run_path: /run/consul
+consul_config_dir: /etc/consul/consul.d
+consul_log_rotate_max_files: 14
+
+consul_client_address: 0.0.0.0
+consul_dnsmasq_enable: true
+consul_dnsmasq_consul_address: 127.0.0.1
+consul_dnsmasq_servers:
+  - 9.9.9.9
+  - 91.239.100.100
+consul_dnsmasq_bind_interfaces: true
+consul_dnsmasq_listen_addresses: ["127.0.0.1"]
+
+consul_datacenter: "{{ metadata_owner }}-{{ metadata_environment }}"
+consul_domain: "{{ metadata_environment }}.{{ metadata_owner }}"

@@ -1,0 +1,27 @@
+{
+    "service": {
+        "name": "{{ consul_service_name }}",
+        "id": "{{ consul_service_name }}-{{ metadata_id }}",
+        "tags": [{{ consul_service_tags | map("to_json") | join(', ') }}],
+        "meta": {
+            "Owner": "{{ metadata_owner }}",
+            "Environment": "{{ metadata_environment }}",
+            "Service": "{{ metadata_service }}"{% if "published" in consul_service_tags %},
+            "URL": "{{ consul_service_url }}"{% if consul_service_url2 is defined and consul_service_url2 %},
+            "URL2": "{{ consul_service_url2 }}"{% endif %}{% if consul_service_url3 is defined and consul_service_url3 %},
+            "URL3": "{{ consul_service_url3 }}"{% endif %}{% if consul_service_url4 is defined and consul_service_url4 %},
+            "URL4": "{{ consul_service_url4 }}"{% endif %}{% if consul_service_url5 is defined and consul_service_url5 %},
+            "URL5": "{{ consul_service_url5 }}"{% endif %}{% endif %}
+        },
+        "port": {{ consul_service_port }}{% if consul_service_check_enabled -%},
+        "check": {
+            "id": "{{ consul_service_name }}",
+            "name": "{{ consul_service_name }} {{ consul_service_check_protocol }} check on port {{ consul_service_check_port }}",
+            "{{ consul_service_check_protocol }}": "{{ consul_service_check_target }}",
+            {%- if consul_service_check_protocol == "http" %}"method": "{{ consul_service_check_method }}",{% endif -%}
+            "interval": "10s",
+            "timeout": "1s"
+        }
+        {%- endif %}
+    }
+}

@@ -1,0 +1,51 @@
+---
+dependency:
+  name: galaxy
+  options:
+    force: False
+driver:
+  name: docker
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .
+  flake8
+platforms:
+  - name: molecule-consul-service-debian10
+    image: jrei/systemd-debian:10
+    privileged: True
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    command: /lib/systemd/systemd
+    groups:
+      - molecule_consul_service
+provisioner:
+  name: ansible
+  log: true
+# https://molecule.readthedocs.io/en/latest/configuration.html#molecule.scenario.Scenario
+scenario:
+  converge_sequence:
+    - dependency
+    - create
+    - prepare
+    - converge
+    - converge  # add a 2nd converge step so we can check if there's 2 maintenances on/off in Consul log
+  test_sequence:
+    - dependency
+    - lint
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - converge # add a 2nd converge step so we can check if there's 2 maintenances on/off in Consul log
+    - side_effect
+    - verify
+    - cleanup
+    - destroy
+verifier:
+  name: testinfra
+  options:
+    tb: short
