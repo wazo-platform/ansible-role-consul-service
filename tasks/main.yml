@@ -5,6 +5,7 @@
 - name: Consul requirements
   package:
     name: procps
+  ignore_errors: yes
 
 - name: Ensure Consul config directory exists
   file:
