@@ -6,7 +6,7 @@ consul_service_tags: []
 #  - published
 #  - basic_auth_enabled
 #  - prometheus
-consul_service_url: "{{ metadata_service }}.{{ metadata_environment }}.{{ metadata_owner }}.{{ metadata_domain }}"
+consul_service_url: "{{ consul_service_name }}.{{ metadata_environment }}.{{ metadata_owner }}.cloud"
 consul_service_url2: null
 consul_service_url3: null
 consul_service_url4: null

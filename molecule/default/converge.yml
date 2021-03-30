@@ -15,8 +15,8 @@
     - name: Update apt cache
       apt:
         update_cache: yes
-        cache_valid_time: 600
       when: ansible_pkg_mgr == 'apt'
+      tags: molecule-idempotence-notest
 
     - name: Check Nginx configuration directory
       stat:
