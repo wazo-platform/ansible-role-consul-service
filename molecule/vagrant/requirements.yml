@@ -1,4 +1,7 @@
 ---
-- src: git@github.com:wazo-platform/ansible-role-base.git
+- src: https://github.com/wazo-platform/ansible-role-metadata.git
   scm: git
-  name: wazo.base
+  name: wazo.metadata
+
+- role: brianshumate.consul
+- role: nginxinc.nginx

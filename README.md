@@ -1,7 +1,6 @@
 # Ansible role consul-service
 
 Ansible role defining a Consul service. It'll
-
 - Install Consul via `brianshumate.consul` as an agent.
 - Define a service with a file in `/etc/consul/consul.d/<consul_service_name>.yml`
 
