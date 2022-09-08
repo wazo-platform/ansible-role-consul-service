@@ -11,7 +11,8 @@
             "URL2": "{{ consul_service_url2 }}"{% endif %}{% if consul_service_url3 is defined and consul_service_url3 %},
             "URL3": "{{ consul_service_url3 }}"{% endif %}{% if consul_service_url4 is defined and consul_service_url4 %},
             "URL4": "{{ consul_service_url4 }}"{% endif %}{% if consul_service_url5 is defined and consul_service_url5 %},
-            "URL5": "{{ consul_service_url5 }}"{% endif %}{% endif %}
+            "URL5": "{{ consul_service_url5 }}"{% endif %}{% if consul_service_urls is defined and consul_service_urls %},
+            "URLs": "{{ consul_service_urls | join(',') }}"{% endif %}{% endif %}
         },
         "port": {{ consul_service_port }}{% if consul_service_check_enabled -%},
         "check": {
