@@ -3,12 +3,12 @@
 
 # consul reload seems to be missing /bin/kill when running molecule test
 - name: Consul requirements
-  ansible.builtin.package:
+  package:
     name: procps
   ignore_errors: yes
 
 - name: Ensure Consul config directory exists
-  ansible.builtin.file:
+  file:
     state: directory
     path: "{{ consul_config_dir }}"
     owner: consul
@@ -16,18 +16,18 @@
     mode: "0700"
 
 - name: Check Consul bootstrapped file
-  ansible.builtin.stat:
+  stat:
     path: /etc/consul/.consul_bootstrapped
   register: consul_service_bootstrapped_file
   changed_when: False
 
 - name: Setup Consul agent
-  ansible.builtin.include_role:
+  include_role:
     name: brianshumate.consul
   when: not consul_service_bootstrapped_file.stat.exists
 
 - name: Define Consul service
-  ansible.builtin.template:
+  template:
     src: consul_service.json.j2
     dest: "{{ consul_config_dir }}/{{ consul_service_name }}.service.json"
     owner: consul
@@ -36,7 +36,7 @@
   register: consul_service_definition
 
 - name: Reload Consul # noqa 503
-  ansible.builtin.service:
+  service:
     name: consul
     state: reloaded
   when: consul_service_definition.changed
