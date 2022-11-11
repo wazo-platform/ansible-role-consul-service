@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: consul-service
+  role_name: consul_service
   namespace: wazo
   author: "Wazo Developers"
   description: "Ansible role defining a Consul service"
