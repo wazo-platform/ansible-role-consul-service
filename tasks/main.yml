@@ -34,9 +34,17 @@
     group: bin
     mode: "0400"
   register: consul_service_definition
+  when: not consul_service_deregister
+
+- name: Remove Consul service
+  file:
+    path: "{{ consul_config_dir }}/{{ consul_service_name }}.service.json"
+    state: absent
+  register: consul_service_removal
+  when: consul_service_deregister
 
 - name: Reload Consul # noqa 503
   service:
     name: consul
     state: reloaded
-  when: consul_service_definition.changed
+  when: consul_service_definition.changed or consul_service_removal.changed
