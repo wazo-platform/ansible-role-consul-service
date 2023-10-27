@@ -24,6 +24,8 @@
 - name: Setup Consul agent
   include_role:
     name: brianshumate.consul
+  vars:
+    consul_enable_local_script_checks: true
   when: not consul_service_bootstrapped_file.stat.exists
 
 - name: Define Consul service
