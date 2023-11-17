@@ -6,6 +6,7 @@
   package:
     name: procps
   ignore_errors: yes
+  register: ignore_errors_register
 
 - name: Ensure Consul config directory exists
   file:
