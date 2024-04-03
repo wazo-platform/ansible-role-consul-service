@@ -48,3 +48,22 @@
     name: consul
     state: reloaded
   when: consul_service_definition.changed or consul_service_removal.changed
+
+- name: Upload a service to put consul under maintenance at shutdown
+  template:
+    src: consul-maint-before-shutdown.service.j2
+    dest: /lib/systemd/system/consul-maint-before-shutdown.service
+    owner: root
+    group: root
+    mode: "0644"
+  register: consul_maint_definition
+
+- name: Load consul maint service
+  service:
+    name: consul-maint-before-shutdown
+    state: started
+    enabled: yes
+    daemon_reload: yes
+  when: consul_maint_definition.changed or consul_service_removal.changed
+  
+    

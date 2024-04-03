@@ -1,0 +1,13 @@
+[Unit]
+Description=Consul maintenance task at shutdown
+After=consul.service
+After={{ consul_service_name }}.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStop=/usr/local/bin/consul maint -enable -reason="Shutting down instance"
+ExecStopPost=/usr/bin/sleep 30
+
+[Install]
+WantedBy=multi-user.target
