@@ -19,6 +19,8 @@ consul_service_check_method: HEAD
 consul_service_check_target: http://localhost:{{ consul_service_check_port }}/
 consul_service_deregister: false
 
+consul_service_maintenance_timeout: 10
+
 # brianshumate.consul settings
 consul_group_name: all
 consul_disable_update_check: true

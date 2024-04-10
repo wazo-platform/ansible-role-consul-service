@@ -52,10 +52,10 @@
 - name: Upload a service to put consul under maintenance at shutdown
   template:
     src: consul-maint-before-shutdown.service.j2
-    dest: /lib/systemd/system/consul-maint-before-shutdown.service
+    dest: /etc/systemd/system/consul-maint-before-shutdown.service
     owner: root
     group: root
-    mode: "0644"
+    mode: "0660"
   register: consul_maint_definition
 
 - name: Load consul maint service

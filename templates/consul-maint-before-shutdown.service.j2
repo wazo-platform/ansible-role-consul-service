@@ -7,7 +7,8 @@ After={{ consul_service_name }}.service
 Type=oneshot
 RemainAfterExit=yes
 ExecStop=/usr/local/bin/consul maint -enable -reason="Shutting down instance"
-ExecStopPost=/usr/bin/sleep 30
+ExecStopPost=/usr/bin/sleep {{ consul_service_maintenance_timeout }}
+TimeoutStopSec={{ (consul_service_maintenance_timeout + 30)|int }}
 
 [Install]
 WantedBy=multi-user.target
