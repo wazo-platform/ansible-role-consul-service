@@ -48,3 +48,26 @@
     name: consul
     state: reloaded
   when: consul_service_definition.changed or consul_service_removal.changed
+
+- name: Populate service facts
+  ansible.builtin.service_facts:
+  when: consul_service_cooldown_maintenance
+
+- name: Check service file is there
+  assert:
+    that:
+      - ansible_facts.services[consul_service_name]
+  when: consul_service_cooldown_maintenance
+
+- name: Upload a service to put consul under maintenance at shutdown
+  template:
+    src: consul-maint-before-shutdown.service.j2
+    dest: /etc/systemd/system/consul-maint-before-shutdown.service
+    owner: root
+    group: root
+    mode: "0660"
+  when: consul_service_cooldown_maintenance
+  notify:
+   - Load consul maint service
+   - Unload consul maint service
+
