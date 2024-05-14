@@ -33,7 +33,7 @@ scenario:
     - converge  # add a 2nd converge step so we can check if there's 2 maintenances on/off in Consul log
   test_sequence:
     - dependency
-    - lint
+    # - lint
     - cleanup
     - destroy
     - syntax

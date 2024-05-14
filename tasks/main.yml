@@ -2,7 +2,7 @@
 # tasks file for ansible-role-consul-service
 
 # consul reload seems to be missing /bin/kill when running molecule test
-- name: Consul requirements
+- name: Consul requirements or not because I try to break the line max of writing to make sure it fails on ansible-lint -we will see if something appears
   package:
     name: procps
   failed_when: false
