@@ -13,19 +13,19 @@
 
   pre_tasks:
     - name: Update apt cache
-      apt:
+      ansible.builtin.apt:
         update_cache: yes
       when: ansible_pkg_mgr == 'apt'
       tags: molecule-idempotence-notest
 
     - name: Check Nginx configuration directory
-      stat:
+      ansible.builtin.stat:
         path: /etc/nginx
       register: consul_service_nginx_configuration_directory
       changed_when: False
 
     - name: Install nginx so default consul service health check is fine
-      include_role:
+      ansible.builtin.include_role:
         name: nginxinc.nginx
       when: not consul_service_nginx_configuration_directory.stat.exists
 
