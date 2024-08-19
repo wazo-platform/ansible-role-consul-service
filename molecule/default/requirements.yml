@@ -3,5 +3,10 @@
   scm: git
   name: wazo.metadata
 
-- role: brianshumate.consul
-- role: nginxinc.nginx
+- name: brianshumate.consul
+  scm: git
+  src: https://github.com/ansible-community/ansible-consul.git
+  version: v2.6.1
+
+- src: nginxinc.nginx
+  version: 0.13.0

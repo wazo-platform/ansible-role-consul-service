@@ -6,11 +6,11 @@ galaxy_info:
   description: "Ansible role defining a Consul service"
   company: "Wazo https://wazo.io"
   license: "MIT"
-  min_ansible_version: 1.8
+  min_ansible_version: '1.8'
   platforms:
     - name: Debian
       versions:
-        - buster
+        - bullseye
     - name: Ubuntu
       versions:
         - bionic
