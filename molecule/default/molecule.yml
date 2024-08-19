@@ -5,11 +5,6 @@ dependency:
     force: False
 driver:
   name: docker
-lint: |
-  set -e
-  yamllint .
-  ansible-lint .
-  flake8
 platforms:
   - name: molecule-consul-service-debian11
     image: jrei/systemd-debian:11
@@ -33,7 +28,6 @@ scenario:
     - converge  # add a 2nd converge step so we can check if there's 2 maintenances on/off in Consul log
   test_sequence:
     - dependency
-    - lint
     - cleanup
     - destroy
     - syntax
