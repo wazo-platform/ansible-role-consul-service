@@ -43,7 +43,7 @@
   register: consul_service_removal
   when: consul_service_deregister
 
-- name: Reload Consul # noqa 503
+- name: Reload Consul # noqa no-handler
   ansible.builtin.service:
     name: consul
     state: reloaded

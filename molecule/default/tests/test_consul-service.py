@@ -1,4 +1,5 @@
 import os
+
 import pytest
 import testinfra.utils.ansible_runner
 
@@ -8,7 +9,8 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 @pytest.mark.parametrize(
-    "name", ["procps"],
+    "name",
+    ["procps"],
 )
 def test_packages(host, name):
     item = host.package(name)
