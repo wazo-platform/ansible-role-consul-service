@@ -1,15 +1,17 @@
 pipeline {
 
   agent {
-    label 'molecule'
+    label 'molecule-aws && small'
   }
 
   stages {
 
     stage ('Test') {
       steps {
-        script { checkout scm }
-        sh 'tox'
+        checkout scm
+        sshagent(credentials: ['ssh-github-wazo-bot']) {
+          sh 'tox'
+        }
       }
     }
 
