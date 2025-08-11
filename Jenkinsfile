@@ -14,5 +14,11 @@ pipeline {
     }
 
   }
+  post {
+    always {
+      cleanWs()
+    }
+  }
+
 
 }
