@@ -1,5 +1,15 @@
 ---
 # tasks file for ansible-role-consul-service
+- name: Gather service facts
+  ansible.builtin.service_facts:
+
+- name: Detect systemd-resolved
+  ansible.builtin.set_fact:
+    has_systemd_resolved: >-
+      {{
+        'systemd-resolved.service' in ansible_facts.services
+        and ansible_facts.services['systemd-resolved.service'].state == 'running'
+      }}
 
 # consul reload seems to be missing /bin/kill when running molecule test
 - name: Consul requirements
@@ -27,6 +37,25 @@
   vars:
     consul_dnsmasq_enable: false
   when: not consul_service_bootstrapped_file.stat.exists
+
+- name: Create systemd-resolved configuration subfolder
+  ansible.builtin.file:
+    path: /etc/systemd/resolved.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  when: has_systemd_resolved
+
+- name: Configure systemd-resolved to use consul dns server
+  ansible.builtin.template:
+    src: 'resolved-consul.conf.j2'
+    dest: /etc/systemd/resolved.conf.d/10-consul.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart systemd-resolved
+  when: has_systemd_resolved
 
 - name: Define Consul service
   ansible.builtin.template:
