@@ -35,7 +35,7 @@
   ansible.builtin.include_role:
     name: brianshumate.consul
   vars:
-    consul_dnsmasq_enable: false
+    consul_dnsmasq_enable: "{{ not has_systemd_resolved }}"
   when: not consul_service_bootstrapped_file.stat.exists
 
 - name: Create systemd-resolved configuration subfolder
