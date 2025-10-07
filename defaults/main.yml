@@ -27,7 +27,7 @@ consul_config_dir: /etc/consul/consul.d
 consul_log_rotate_max_files: 14
 
 consul_client_address: 0.0.0.0
-consul_dnsmasq_enable: false
+consul_dnsmasq_enable: true
 consul_dnsmasq_consul_address: 127.0.0.1
 consul_dnsmasq_servers:
   - 9.9.9.9
