@@ -21,7 +21,7 @@
             "{{ consul_service_check_protocol }}": "{{ consul_service_check_target }}",
             {%- if consul_service_check_protocol == "http" %}"method": "{{ consul_service_check_method }}",{% endif -%}
             "interval": "10s",
-            "timeout": "1s"
+            "timeout": "{{ consul_service_check_timeout }}"
         }
         {%- endif %}
     }
