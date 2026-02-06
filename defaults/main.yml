@@ -17,6 +17,7 @@ consul_service_check_port: "{{ consul_service_port }}"
 consul_service_check_protocol: http
 consul_service_check_method: HEAD
 consul_service_check_target: http://localhost:{{ consul_service_check_port }}/
+consul_service_check_timeout: 1s
 consul_service_deregister: false
 
 # brianshumate.consul settings
