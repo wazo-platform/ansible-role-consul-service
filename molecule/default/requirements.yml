@@ -1,12 +1,12 @@
 ---
-- src: https://github.com/wazo-platform/ansible-role-metadata.git
+- src: git@github.com:wazo-platform/ansible-role-metadata.git
   scm: git
   name: wazo.metadata
 
-- name: brianshumate.consul
+- src: git@github.com:TinxHQ/ansible-role-consul.git
   scm: git
-  src: https://github.com/ansible-community/ansible-consul.git
-  version: v2.6.1
+  version: Init_role
+  name: wazo.consul
 
 - src: nginxinc.nginx
   version: 0.13.0

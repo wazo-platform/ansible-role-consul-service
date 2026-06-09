@@ -1,8 +1,8 @@
 # Ansible role consul-service
 
 Ansible role defining a Consul service. It'll
-- Install Consul via `brianshumate.consul` as an agent.
-- Define a service with a file in `/etc/consul/consul.d/<consul_service_name>.yml`
+- Install Consul via `wazo.consul` as an agent.
+- Define a service with a file in `/etc/consul.d/<consul_service_name>.service.json`
 
 This role is tested using [Molecule](https://molecule.readthedocs.io/). The
 default will use Docker that you must install yourself. Then run `tox` to setup

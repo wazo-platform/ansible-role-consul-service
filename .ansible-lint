@@ -1,0 +1,8 @@
+---
+# wazo.consul and wazo.metadata are external roles fetched from git (see
+# molecule/default/requirements.yml) only when running the molecule scenario.
+# They are not needed to lint this role, so we mock them here to avoid cloning
+# them from git during ansible-lint runs.
+mock_roles:
+  - wazo.consul
+  - wazo.metadata

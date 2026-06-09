@@ -33,13 +33,10 @@ repos:
     rev: v25.9.2
     hooks:
       - id: ansible-lint
-        name: ansible-lint (with isolated roles)
+        name: ansible-lint
         language_version: python3.11
         additional_dependencies:
           - ansible  # Include community roles
-        entry: >
-          bash -eu -c '
-          export ANSIBLE_ROLES_PATH=${VIRTUAL_ENV}/.ansible/roles &&
-          ansible-galaxy install -r molecule/default/requirements.yml &&
-          python3 -m ansiblelint -v --force-color
-          '
+        # wazo.consul and wazo.metadata are mocked in .ansible-lint, so there is
+        # no need to fetch the external roles from git just to lint this role.
+        entry: python3 -m ansiblelint -v --force-color

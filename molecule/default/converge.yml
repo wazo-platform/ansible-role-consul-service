@@ -5,7 +5,6 @@
 
   vars:
     consul_node_role: bootstrap
-    consul_group_name: molecule_consul_service
     consul_service_url4: test.local
     consul_service_tags:
       - testtag
