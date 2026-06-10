@@ -34,7 +34,7 @@ repos:
     hooks:
       - id: ansible-lint
         name: ansible-lint
-        language_version: python3.11
+        language_version: python3
         additional_dependencies:
           - ansible  # Include community roles
         # wazo.consul and wazo.metadata are mocked in .ansible-lint, so there is

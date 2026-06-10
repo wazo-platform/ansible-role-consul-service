@@ -5,8 +5,7 @@
 
 - src: git@github.com:TinxHQ/ansible-role-consul.git
   scm: git
-  version: Init_role
   name: wazo.consul
 
-- src: nginxinc.nginx
-  version: 0.13.0
+- src: geerlingguy.nginx
+  version: 3.3.0
