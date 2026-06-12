@@ -8,6 +8,7 @@
 
 - name: Gather package facts
   ansible.builtin.package_facts:
+    manager: apt
 
 - name: Setup Consul agent
   ansible.builtin.include_role:
