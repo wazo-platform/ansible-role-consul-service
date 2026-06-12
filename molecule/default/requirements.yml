@@ -3,7 +3,7 @@
   scm: git
   name: wazo.metadata
 
-- src: git@github.com:TinxHQ/ansible-role-consul.git
+- src: git@github.com:wazo-platform/ansible-role-consul.git
   scm: git
   name: wazo.consul
 
