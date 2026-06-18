@@ -28,7 +28,7 @@ pipeline {
           steps {
             script { checkout scm }
             withCredentials([
-                [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkins-private'],
+                [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS Jenkins community'],
             ]) {
               sh "aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 119948825560.dkr.ecr.eu-west-1.amazonaws.com"
               sh 'tox -e molecule-ansible8'
@@ -49,7 +49,7 @@ pipeline {
           steps {
             script { checkout scm }
             withCredentials([
-                [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkins-private'],
+                [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS Jenkins community'],
             ]) {
               sh "aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 119948825560.dkr.ecr.eu-west-1.amazonaws.com"
               sh 'tox -e molecule-ansible13'
