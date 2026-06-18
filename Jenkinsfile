@@ -10,7 +10,9 @@ pipeline {
       }
       steps {
         script { checkout scm }
-        sh 'tox -e linters'
+          sshagent(credentials: ['ssh-github-wazo-bot']) {
+            sh 'tox -e linters'
+          }
       }
       post {
         always {
