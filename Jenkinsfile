@@ -10,9 +10,7 @@ pipeline {
       }
       steps {
         script { checkout scm }
-          sshagent(credentials: ['ssh-github-wazo-bot']) {
-            sh 'tox -e linters'
-          }
+          sh 'tox -e linters'
       }
       post {
         always {
@@ -29,14 +27,12 @@ pipeline {
           }
           steps {
             script { checkout scm }
-            sshagent(credentials: ['ssh-github-wazo-bot']) {
-              withCredentials([
-                  [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkins-private'],
-              ]) {
-                sh "aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 119948825560.dkr.ecr.eu-west-1.amazonaws.com"
-                sh 'tox -e molecule-ansible8'
-                sh 'tox -e molecule-ansible8-debian12'
-              }
+            withCredentials([
+                [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkins-private'],
+            ]) {
+              sh "aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 119948825560.dkr.ecr.eu-west-1.amazonaws.com"
+              sh 'tox -e molecule-ansible8'
+              sh 'tox -e molecule-ansible8-debian12'
             }
           }
           post {
@@ -52,13 +48,11 @@ pipeline {
           }
           steps {
             script { checkout scm }
-            sshagent(credentials: ['ssh-github-wazo-bot']) {
-              withCredentials([
-                  [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkins-private'],
-              ]) {
-                sh "aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 119948825560.dkr.ecr.eu-west-1.amazonaws.com"
-                sh 'tox -e molecule-ansible13'
-              }
+            withCredentials([
+                [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-jenkins-private'],
+            ]) {
+              sh "aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 119948825560.dkr.ecr.eu-west-1.amazonaws.com"
+              sh 'tox -e molecule-ansible13'
             }
           }
           post {
