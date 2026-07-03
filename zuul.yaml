@@ -1,0 +1,11 @@
+---
+- project:
+    wazo-check:
+      jobs:
+        - wazo-tox-molecule-bookworm
+    wazo-gate:
+      jobs:
+        - wazo-tox-molecule-bookworm
+    auto-merge:
+      jobs:
+        - wazo-tox-molecule-bookworm
