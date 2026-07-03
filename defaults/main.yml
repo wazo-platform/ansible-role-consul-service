@@ -20,15 +20,12 @@ consul_service_check_target: http://localhost:{{ consul_service_check_port }}/
 consul_service_check_timeout: 1s
 consul_service_deregister: false
 
-# brianshumate.consul settings
-consul_group_name: all
+# wazo.consul settings
 consul_disable_update_check: true
 consul_run_path: /run/consul
-consul_config_dir: /etc/consul/consul.d
-consul_log_rotate_max_files: 14
+consul_config_dir: /etc/consul.d
 
 consul_client_address: 0.0.0.0
-consul_dnsmasq_enable: true
 consul_dnsmasq_consul_address: 127.0.0.1
 consul_dnsmasq_servers:
   - 9.9.9.9

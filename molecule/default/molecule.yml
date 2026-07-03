@@ -6,17 +6,8 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: molecule-consul-service-debian11
-    image: jrei/systemd-debian:11
-    privileged: True
-    volumes:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
-    cgroupns_mode: host
-    command: /lib/systemd/systemd
-    groups:
-      - molecule_consul_service
-  - name: molecule-consul-service-debian12
-    image: jrei/systemd-debian:12
+  - name: molecule-consul-service-debian${MOLECULE_DEBIAN_VERSION:-11}
+    image: 119948825560.dkr.ecr.eu-west-1.amazonaws.com/wazo-it-tools/debian-systemd:${MOLECULE_DEBIAN_VERSION:-11}
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:rw"

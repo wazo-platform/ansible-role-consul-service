@@ -25,8 +25,7 @@ def test_user(host):
 @pytest.mark.parametrize(
     "path",
     [
-        "/etc/consul/.consul_bootstrapped",
-        "/etc/consul/consul.d/default-service.service.json",
+        "/etc/consul.d/default-service.service.json",
     ],
 )
 def test_files(host, path):
@@ -44,9 +43,7 @@ def test_services(host, name):
 
 def test_service_file_content(host):
     with host.sudo():
-        service = host.file(
-            "/etc/consul/consul.d/default-service.service.json"
-        ).content_string
+        service = host.file("/etc/consul.d/default-service.service.json").content_string
         assert "testtag" in service
         assert "published" in service
         assert '"URL"' in service

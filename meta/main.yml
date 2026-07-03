@@ -12,8 +12,8 @@ galaxy_info:
       versions:
         - bullseye
         - bookworm
+        - trixie
   galaxy_tags:
     - system
 dependencies:
-  - brianshumate.consul
   - wazo.metadata
