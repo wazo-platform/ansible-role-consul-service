@@ -12,6 +12,10 @@ python environment and start testing.
 
 Python & [tox](https://tox.readthedocs.io). See imports in `library/*` and tasks in `molecule/default/converge.yml` if any specific, but those should be added in `tox.ini`.
 
+The molecule tests use the public
+[`wazoplatform/systemd-debian`](https://hub.docker.com/r/wazoplatform/systemd-debian)
+image (tags `11`, `12`, `13`)
+
 ## Role Variables
 
 See [defaults/main.yml](defaults/main.yml).

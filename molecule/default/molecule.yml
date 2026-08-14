@@ -7,7 +7,7 @@ driver:
   name: docker
 platforms:
   - name: molecule-consul-service-debian${MOLECULE_DEBIAN_VERSION:-11}
-    image: 119948825560.dkr.ecr.eu-west-1.amazonaws.com/wazo-it-tools/debian-systemd:${MOLECULE_DEBIAN_VERSION:-11}
+    image: wazoplatform/systemd-debian:${MOLECULE_DEBIAN_VERSION:-11}
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
